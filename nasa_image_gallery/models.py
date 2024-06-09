@@ -2,7 +2,8 @@ from django.db import models
 from django.conf import settings
 
 # modelo para un favorito.
-# un usuario puede tener 0...n favoritos asociados. Si un usuario es borrado, no nos interesa retener sus favoritos, por lo cual se borran en cascada.
+# un usuario puede tener 0...n favoritos asociados. Si un usuario es borrado, no nos interesa 
+# retener sus favoritos, por lo cual se borran en cascada.
 class Favourite(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()

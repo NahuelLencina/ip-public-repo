@@ -1,4 +1,8 @@
-# mapper: se refiere a un componente o conjunto de funciones que se utiliza para convertir o "mapear" datos de un formato o estructura a otro. Esta conversión se realiza típicamente cuando se trabaja con diferentes capas de una aplicación, como por ejemplo, entre la capa de datos y la capa de presentación, o entre dos modelos de datos diferentes, mejorando la coherencia y eficiencia.
+# mapper: se refiere a un componente o conjunto de funciones que se 
+# utiliza para convertir o "mapear" datos de un formato o estructura a otro. 
+# Esta conversión se realiza típicamente cuando se trabaja con diferentes capas de una 
+# aplicación, como por ejemplo, entre la capa de datos y la capa de presentación, o entre
+# dos modelos de datos diferentes, mejorando la coherencia y eficiencia.
 
 from nasa_image_gallery.layers.generic.nasa_card import NASACard
 
