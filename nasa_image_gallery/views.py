@@ -24,8 +24,9 @@ def getAllImagesAndFavouriteList(request):
 def home(request):
     # llama a la función auxiliar getAllImagesAndFavouriteList() y obtiene 2 listados: uno de las imágenes de la API y otro de favoritos por usuario*.
     # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un listado vacío [].
+   #===================================================================================
     images, favourite_list = getAllImagesAndFavouriteList(request)
-   
+   #===================================================================================
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
 
@@ -34,8 +35,9 @@ def search(request):
     images, favourite_list = getAllImagesAndFavouriteList(request)
     search_msg = request.POST.get('query', '')
 
-    # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, debe filtrar aquellas imágenes que posean el texto de búsqueda.
-    pass
+    # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, 
+    # debe filtrar aquellas imágenes que posean el texto de búsqueda.
+    pass 
 
 
 # las siguientes funciones se utilizan para implementar la sección de favoritos: 
