@@ -34,10 +34,21 @@ def home(request):
 def search(request):
     images, favourite_list = getAllImagesAndFavouriteList(request)
     search_msg = request.POST.get('query', '')
+    
+    if not search_msg:
+        search_msg = 'space'
+        
+    images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
+    return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
     # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, 
     # debe filtrar aquellas imágenes que posean el texto de búsqueda.
     pass 
+
+def login(request):
+    return render(request, 'registration/login.html')
+
+
 
 
 # las siguientes funciones se utilizan para implementar la sección de favoritos: 
