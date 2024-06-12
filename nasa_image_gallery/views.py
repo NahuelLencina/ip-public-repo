@@ -7,6 +7,16 @@ from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+#============================================================
+# Se implementan las herramientas necesarias para manejar 
+# la autenticación
+from django.contrib.auth import authenticate, login as auth_login
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+#============================================================
+
+
 # función que invoca al template del índice de la aplicación.
 def index_page(request):
     return render(request, 'index.html')
@@ -23,7 +33,8 @@ def getAllImagesAndFavouriteList(request):
 # función principal de la galería.
 def home(request):
     # llama a la función auxiliar getAllImagesAndFavouriteList() y obtiene 2 listados: uno de las imágenes de la API y otro de favoritos por usuario*.
-    # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un listado vacío [].
+    # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un 
+    # listado vacío [].
    #===================================================================================
     images, favourite_list = getAllImagesAndFavouriteList(request)
    #===================================================================================
@@ -43,13 +54,20 @@ def search(request):
 
     # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, 
     # debe filtrar aquellas imágenes que posean el texto de búsqueda.
-    pass 
+    
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('home')  # Redirige a la función home después de un login exitoso
+        else:
+            return render(request, 'registration/login.html', {'error': 'Invalid username or password'})
     return render(request, 'registration/login.html')
-
-
-
+    
 
 # las siguientes funciones se utilizan para implementar la sección de favoritos: 
 # traer los favoritos de un usuario, guardarlos, eliminarlos y desloguearse de la app.
@@ -71,4 +89,6 @@ def deleteFavourite(request):
 
 @login_required
 def exit(request):
-    pass
+    logout(request)
+    
+    return redirect('home')  # Redirige a la página de inicio después de cerrar sesión

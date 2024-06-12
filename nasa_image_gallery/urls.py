@@ -4,12 +4,18 @@ from . import views
 
 urlpatterns = [
     path('', views.index_page, name='index-page'),
-    path('login/', views.login, name='login'),
     path('home/', views.home, name='home'),
+
+    path('login/', views.login, name='login'),
     path('home/login/', views.login, name='login'),
+    path('buscar/login/',views.login, name='login'),
+
+    path('logout/', views.exit, name='login'),
+    path('home/logout/', views.exit, name='login'), 
+    path('buscar/logout/',views.exit, name='login'),
+ 
     path('buscar/', views.search, name='buscar'),
     
-
     path('favourites/', views.getAllFavouritesByUser, name='favoritos'),
     path('favourites/add/', views.saveFavourite, name='agregar-favorito'),
     path('favourites/delete/', views.deleteFavourite, name='borrar-favorito'),

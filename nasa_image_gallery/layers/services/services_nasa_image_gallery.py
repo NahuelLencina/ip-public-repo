@@ -41,15 +41,15 @@ def getAllFavouritesByUser(request):
     else:
         user = get_user(request)
 #========================================================================
-        favourite_list = getAllFavouritesByUser(user)     # buscamos desde el repositorio TODOS los favoritos del usuario 
-                                                          #(variable 'user').
-        mapped_favourites = []
+        favourite_Usuario = repositories.getAllFavouritesByUser(user)     # buscamos desde el repositorio TODOS los favoritos del usuario 
+                                                       #(variable 'user').
+        list_favourites = []
 
-        for favourite in favourite_list:
+        for favourite in favourite_Usuario:
             nasa_card = mapper.fromRepositoryIntoNASACard(favourite) # transformamos cada favorito en una NASACard, y lo almacenamos en nasa_card.
-            mapped_favourites.append(nasa_card)
+            list_favourites.append(nasa_card)
 #========================================================================
-        return mapped_favourites
+        return list_favourites
 
 
 def deleteFavourite(request):
