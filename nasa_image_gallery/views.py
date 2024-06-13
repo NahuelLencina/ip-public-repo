@@ -50,7 +50,8 @@ def search(request):
         search_msg = 'space'
     
    
-    search_msg=services_nasa_image_gallery.translateSearch(search_msg) #si la palabra no es 'space', traduce
+    else:
+        search_msg=services_nasa_image_gallery.translateSearch(search_msg) #si la palabra no es 'space', traduce
         
     images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )

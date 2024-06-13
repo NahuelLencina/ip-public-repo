@@ -57,4 +57,8 @@ def saveFavourite(request):
 def deleteFavourite(request):
     favId = request.POST.get('id')
     return repositories.deleteFavourite(favId) # borramos un favorito por su ID.
+
+def translateSearch(request): #traduce el texto ingresado 
+    return transport.translateText(request) 
+
     

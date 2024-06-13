@@ -24,6 +24,5 @@ def getAllImages(input=None):
 
     return json_collection
 
-def translateText(requests): #comunicacion con API Google Translate 
-    translation = Translator.translate()
-    return translation(requests, scr= 'en', dest='es') 
+def translateText(request): #comunicacion con API Google Translate 
+    return Translator.translate(request, scr= 'en', dest='es') 
