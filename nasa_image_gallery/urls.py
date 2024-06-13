@@ -13,12 +13,14 @@ urlpatterns = [
     path('logout/', views.exit, name='login'),
     path('home/logout/', views.exit, name='login'), 
     path('buscar/logout/',views.exit, name='login'),
+    path('favourites/logout',views.exit, name='login'),
  
     path('buscar/', views.search, name='buscar'),
     
     path('favourites/', views.getAllFavouritesByUser, name='favoritos'),
     path('favourites/add/', views.saveFavourite, name='agregar-favorito'),
+    path('favourites/', views.deleteFavourite, name='borrar-favorito'),
     path('favourites/delete/', views.deleteFavourite, name='borrar-favorito'),
-
+    
     path('exit/', views.exit, name='exit'),
 ]

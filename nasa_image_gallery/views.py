@@ -48,6 +48,9 @@ def search(request):
     
     if not search_msg:
         search_msg = 'space'
+    
+  #  if  search_msg:
+   #     search_msg=services_nasa_image_gallery.translateSearch(search_msg) #si la palabra no es 'space', traduce
         
     images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
@@ -73,22 +76,23 @@ def login(request):
 # traer los favoritos de un usuario, guardarlos, eliminarlos y desloguearse de la app.
 @login_required
 def getAllFavouritesByUser(request):
-    favourite_list = services_nasa_image_gallery.repositories.getAllFavouritesByUser()
+    favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
     return render(request, 'favourites.html', {'favourite_list': favourite_list})
 
 
 @login_required
-def saveFavourite(request):   
-    pass
+def saveFavourite(request): 
+    favourite_list = services_nasa_image_gallery.saveFavourite(request)
+    return render(request, 'favourites.html', {'favourite_list': favourite_list})
 
 
 @login_required
 def deleteFavourite(request):
-    pass
+    favourite_list = services_nasa_image_gallery.deleteFavourite(request)
+    return render(request, 'favourites.html', {'favourite_list': favourite_list})
 
 
 @login_required
 def exit(request):
-    logout(request)
-    
+    logout(request) 
     return redirect('home')  # Redirige a la página de inicio después de cerrar sesión
