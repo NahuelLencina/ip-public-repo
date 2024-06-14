@@ -6,8 +6,6 @@ from ..generic import mapper
 from django.contrib.auth import get_user
 
 
-
-
 def getAllImages(input=None):
     # obtiene un listado de imágenes desde transport.py y lo guarda en un json_collection.
     # ¡OJO! el parámetro 'input' indica si se debe buscar por un valor introducido en el buscador.
@@ -58,7 +56,5 @@ def deleteFavourite(request):
     favId = request.POST.get('id')
     return repositories.deleteFavourite(favId) # borramos un favorito por su ID.
 
-def translateSearch(request): #traduce el texto ingresado 
-    return transport.translateText(request) 
 
     

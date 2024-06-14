@@ -2,7 +2,7 @@
 
 import requests
 from ...config import config
-from googletrans import Translator
+
 
 # comunicación con la REST API de la NASA.
 def getAllImages(input=None):
@@ -23,6 +23,3 @@ def getAllImages(input=None):
             pass
 
     return json_collection
-
-def translateText(request): #comunicacion con API Google Translate 
-    return Translator.translate(request, scr= 'en', dest='es') 

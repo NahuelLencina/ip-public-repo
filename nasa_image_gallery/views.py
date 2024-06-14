@@ -15,7 +15,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 #============================================================
-
+from googletrans import Translator
 
 # función que invoca al template del índice de la aplicación.
 def index_page(request):
@@ -49,10 +49,16 @@ def search(request):
     if not search_msg:
         search_msg = 'space'
     
-   
     else:
-        search_msg=services_nasa_image_gallery.translateSearch(search_msg) #si la palabra no es 'space', traduce
-        
+       traduccion = Translator()
+       traduccion = traduccion.translate(search_msg, src='es', dest='en')
+       search_msg = traduccion.text
+      # traduccion = Translator()
+      # detected_language = traduccion.detect(search_msg).lang # Detectar el idioma
+      
+        #translation_result = traduccion.translate(search_msg, src=detected_language, dest='en')
+        #search_msg = translation_result.text
+
     images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
