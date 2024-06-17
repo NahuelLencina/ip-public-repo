@@ -3,6 +3,11 @@
     <form action="" method="POST" style="display: inline-block;">
         {% csrf_token %}
         <h2 class="text-center">Inicio de sesión</h2>
+
+        {% if error %}
+            <div class="error-message" style="color: red; margin-bottom: 5%;">{{ error }}</div>
+        {% endif %}
+      
         <div class="form-group" style="margin-bottom: 5%;">
             <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required="required">
         </div>

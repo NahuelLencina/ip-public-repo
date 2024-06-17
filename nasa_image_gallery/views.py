@@ -50,14 +50,13 @@ def search(request):
         search_msg = 'space'
     
     else:
-       traduccion = Translator()
-       traduccion = traduccion.translate(search_msg, src='es', dest='en')
-       search_msg = traduccion.text
-      # traduccion = Translator()
-      # detected_language = traduccion.detect(search_msg).lang # Detectar el idioma
-      
-        #translation_result = traduccion.translate(search_msg, src=detected_language, dest='en')
-        #search_msg = translation_result.text
+        traduccion = Translator()
+        traduccion = traduccion.translate(search_msg, src='es', dest='en')
+        search_msg = traduccion.text
+    
+       # traduccion = traduccion.detect(search_msg).lang # Detectar el idioma
+       # translation_result = traduccion.translate(search_msg,traduccion = traduccion.detect(search_msg).lang , dest='en')
+       # search_msg = translation_result.text
 
     images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
@@ -73,10 +72,12 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('home')  # Redirige a la función home después de un login exitoso
-        else:
-            return render(request, 'registration/login.html', {'error': 'Invalid username or password'})
+            return redirect('home') 
+        else: # acá se desarrolla la logica para mostrar el usuario/contraseña incorrecto
+            error = 'Usuario/Contraseña, Incorrecto' # Se carga en error la frase a mostrar
+            return render(request, 'registration/login.html', {'error': error}) # se renderiza a la pagina Login
     return render(request, 'registration/login.html')
+     
     
 
 # las siguientes funciones se utilizan para implementar la sección de favoritos: 
