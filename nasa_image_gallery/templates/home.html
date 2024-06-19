@@ -28,8 +28,18 @@
                         <input type="hidden" name="description" value="{{ imagen.description }}">
                         <input type="hidden" name="image_url" value="{{ imagen.image_url }}">
                         <input type="hidden" name="date" value="{{ imagen.date }}"> {% if imagen in favourite_list %}
-                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white" disabled>✔️ Ya está añadida a favoritos</button> {% else %}
-                        <button type="submit" class="btn btn-primary btn-sm float-left" style="color:white">❤️ Añadir a favoritos</button> {% endif %}
+  
+                        <button 
+                            type="submit" class="btn btn-primary btn-sm float-left" 
+                            <span style="color:green;">✔️</span>
+                            <span style="color: white;">Ya está añadida a favoritos</span> 
+                            
+                        </button> {% else %}
+                        <button 
+                            type="submit" class="btn btn-primary btn-sm float-left" 
+                            <span style="color: red;">❤️</span> 
+                            <span style="color: white;">Añadir a favoritos</span> 
+                        </button> {% endif %}
 
                     </form>
                 </div>
@@ -39,4 +49,5 @@
         {% endfor %}
     </div>
 </main>
+
 {% endblock %}

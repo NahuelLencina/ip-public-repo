@@ -47,10 +47,19 @@ def getAllFavouritesByUser(request):
 #================================================================
 # añadir favoritos (usado desde el template 'home.html')
 def saveFavourite(request):
-    fav = mapper.fromTemplateIntoNASACard(request) # transformamos un request del template en una NASACard.
-    fav.user = request.user  # le seteamos el usuario correspondiente.
-    return repositories.saveFavourite(fav) # lo guardamos en la base.
-
+    try:
+        fav = mapper.fromTemplateIntoNASACard(request)  # transformamos un request del template en una NASACard.
+        fav.user = request.user  # le seteamos el usuario correspondiente.
+        saved_fav = repositories.saveFavourite(fav)
+        if saved_fav:
+            # Recuperar la lista actualizada de favoritos después de guardar
+            favourite_list = repositories.Favourite.objects.filter(user=request.user)
+            return favourite_list
+        else:
+            return None
+    except Exception as error:
+        print(f"Error en saveFavourite service: {error}")
+        return None
 
 def deleteFavourite(request):
     favId = request.POST.get('id')

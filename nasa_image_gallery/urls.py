@@ -19,7 +19,7 @@ urlpatterns = [
     
     path('favourites/', views.getAllFavouritesByUser, name='favoritos'),
     path('favourites/add/', views.saveFavourite, name='agregar-favorito'),
-   
+    #path('home/', views.getAllFavouritesByUser, name='favoritos'),
     #path('favourites/', views.deleteFavourite, name='borrar-favorito'),
     path('favourites/delete/', views.deleteFavourite, name='borrar-favorito'),
     

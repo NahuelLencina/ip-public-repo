@@ -72,7 +72,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('home') 
+            return redirect('home')  # Redirige a la función home después de un login exitoso
         else: # acá se desarrolla la logica para mostrar el usuario/contraseña incorrecto
             error = 'Usuario/Contraseña, Incorrecto' # Se carga en error la frase a mostrar
             return render(request, 'registration/login.html', {'error': error}) # se renderiza a la pagina Login
@@ -87,17 +87,15 @@ def getAllFavouritesByUser(request):
     favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
     return render(request, 'favourites.html', {'favourite_list': favourite_list})
 
-
 @login_required
 def saveFavourite(request): 
-    favourite_list = services_nasa_image_gallery.saveFavourite(request)
-    return render(request, 'favourites.html', {'favourite_list': favourite_list})
-
-
+        favourite_list = services_nasa_image_gallery.saveFavourite(request)
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+      
 @login_required
 def deleteFavourite(request):
     favourite_list = services_nasa_image_gallery.deleteFavourite(request)
-    return render(request, 'favourites.html', {'favourite_list': favourite_list})
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @login_required
