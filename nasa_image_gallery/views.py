@@ -94,12 +94,12 @@ def register(request):
             return render(request, 'registration/register.html', {'error': error})
         
         if User.objects.filter(username=username).exists():
-            error = 'Username is already taken.'
-            return render(request, 'registration/login.html', {'error': error})
+            error = 'El usuario no esta disponible.'
+            return render(request, 'registration/register.html', {'error': error})
         
         if User.objects.filter(email=email).exists():
-            error = 'Email address is already registered.'
-            return render(request, 'registration/login.html', {'error': error})
+            error = 'El email ya tiene una cuenta asociada.'
+            return render(request, 'registration/register.html', {'error': error})
         
         # Crear el usuario si todas las validaciones pasan
         user = User.objects.create_user(username=username, email=email, password=password1)
@@ -109,8 +109,8 @@ def register(request):
         user = authenticate(username=username, password=password1)
         login(request, user)
         
-        messages.success(request, f'Account created for {username}!')
-        return redirect('home')  # Redirigir a la página de inicio o donde prefieras
+        messages.success(request, f'Cuenta Creada {username}!')
+        return redirect('index-page')  # Redirigir a la página de inicio o donde prefieras
     else:
         # Si es GET, mostrar el formulario vacío
         return render(request, 'registration/register.html')

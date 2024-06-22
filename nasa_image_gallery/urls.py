@@ -28,7 +28,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/register/', views.register, name='register'),
     path('home/register/', views.register, name='register'),
-
+    path('register/home', views.register, name='register'),
     # Ruta de salida
     path('exit/', views.exit, name='exit'),
 ]
