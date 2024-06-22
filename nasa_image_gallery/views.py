@@ -5,7 +5,7 @@
 from django.shortcuts import redirect, render
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout 
 
 #============================================================
 # Se implementan las herramientas necesarias para manejar 
@@ -14,6 +14,9 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+
+from django.contrib import messages
+from django.contrib.auth.models import User
 #============================================================
 from googletrans import Translator
 
@@ -79,6 +82,41 @@ def login(request):
     return render(request, 'registration/login.html')
      
     
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        email = request.POST.get('email')
+        
+        if password1 != password2:
+            error = 'Las contraseñas son distintas.'
+            return render(request, 'registration/register.html', {'error': error})
+        
+        if User.objects.filter(username=username).exists():
+            error = 'Username is already taken.'
+            return render(request, 'registration/login.html', {'error': error})
+        
+        if User.objects.filter(email=email).exists():
+            error = 'Email address is already registered.'
+            return render(request, 'registration/login.html', {'error': error})
+        
+        # Crear el usuario si todas las validaciones pasan
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+        
+        # Autenticar al usuario y redirigir a la página de inicio
+        user = authenticate(username=username, password=password1)
+        login(request, user)
+        
+        messages.success(request, f'Account created for {username}!')
+        return redirect('home')  # Redirigir a la página de inicio o donde prefieras
+    else:
+        # Si es GET, mostrar el formulario vacío
+        return render(request, 'registration/register.html')
+
+
+  
 
 # las siguientes funciones se utilizan para implementar la sección de favoritos: 
 # traer los favoritos de un usuario, guardarlos, eliminarlos y desloguearse de la app.

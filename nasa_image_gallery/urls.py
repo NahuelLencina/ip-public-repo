@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import path
 from . import views
 
@@ -6,23 +5,30 @@ urlpatterns = [
     path('', views.index_page, name='index-page'),
     path('home/', views.home, name='home'),
 
+    # Rutas de inicio de sesión
     path('login/', views.login, name='login'),
     path('home/login/', views.login, name='login'),
-    path('buscar/login/',views.login, name='login'),
+    path('buscar/login/', views.login, name='login'),
 
-    path('logout/', views.exit, name='login'),
-    path('home/logout/', views.exit, name='login'), 
-    path('buscar/logout/',views.exit, name='login'),
-    path('favourites/logout',views.exit, name='login'),
- 
+    # Rutas de cierre de sesión
+    path('logout/', views.exit, name='logout'),
+    path('home/logout/', views.exit, name='logout'),
+    path('buscar/logout/', views.exit, name='logout'),
+    path('favourites/logout/', views.exit, name='logout'),
+
+    # Ruta de búsqueda
     path('buscar/', views.search, name='buscar'),
-    
+
+    # Rutas de favoritos
     path('favourites/', views.getAllFavouritesByUser, name='favoritos'),
     path('favourites/add/', views.saveFavourite, name='agregar-favorito'),
-    #path('home/', views.getAllFavouritesByUser, name='favoritos'),
-    #path('favourites/', views.deleteFavourite, name='borrar-favorito'),
     path('favourites/delete/', views.deleteFavourite, name='borrar-favorito'),
-    
-    
+
+    # Rutas de registro
+    path('register/', views.register, name='register'),
+    path('login/register/', views.register, name='register'),
+    path('home/register/', views.register, name='register'),
+
+    # Ruta de salida
     path('exit/', views.exit, name='exit'),
 ]

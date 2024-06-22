@@ -3,7 +3,9 @@
     <form action="" method="POST" style="display: inline-block;">
         {% csrf_token %}
         <h2 class="text-center">Inicio de sesión</h2>
-
+        
+         <!--Este código verifica si hay un mensaje de error y, en caso afirmativo, 
+                         muestra ese mensaje en un div con estilo específico.-->
         {% if error %}
             <div class="error-message" style="color: red; margin-bottom: 5%;">{{ error }}</div>
         {% endif %}
