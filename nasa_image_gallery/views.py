@@ -101,16 +101,11 @@ def register(request):
             error = 'El email ya tiene una cuenta asociada.'
             return render(request, 'registration/register.html', {'error': error})
         
-        # Crear el usuario si todas las validaciones pasan
+        # Crear el usuario si todas las validaciones son correctas
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
-        
-        # Autenticar al usuario y redirigir a la página de inicio
-        user = authenticate(username=username, password=password1)
-        login(request, user)
-        
-        messages.success(request, f'Cuenta Creada {username}!')
-        return redirect('index-page')  # Redirigir a la página de inicio o donde prefieras
+        auth_login(request, user)
+        return render(request, 'index.html')
     else:
         # Si es GET, mostrar el formulario vacío
         return render(request, 'registration/register.html')
