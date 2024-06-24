@@ -15,6 +15,7 @@ urlpatterns = [
     path('home/logout/', views.exit, name='logout'),
     path('buscar/logout/', views.exit, name='logout'),
     path('favourites/logout/', views.exit, name='logout'),
+    path('home/register/logout/', views.exit, name='logout'), 
 
     # Ruta de búsqueda
     path('buscar/', views.search, name='buscar'),

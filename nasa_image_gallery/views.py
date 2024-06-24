@@ -56,10 +56,6 @@ def search(request):
         traduccion = Translator()
         traduccion = traduccion.translate(search_msg, src='es', dest='en')
         search_msg = traduccion.text
-    
-       # traduccion = traduccion.detect(search_msg).lang # Detectar el idioma
-       # translation_result = traduccion.translate(search_msg,traduccion = traduccion.detect(search_msg).lang , dest='en')
-       # search_msg = translation_result.text
 
     images= services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
@@ -103,8 +99,8 @@ def register(request):
         
         # Crear el usuario si todas las validaciones son correctas
         user = User.objects.create_user(username=username, email=email, password=password1)
-        user.save()
-        auth_login(request, user)
+        user.save() 
+        auth_login(request, user) 
         return render(request, 'index.html')
     else:
         # Si es GET, mostrar el formulario vacío
