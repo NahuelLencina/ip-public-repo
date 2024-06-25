@@ -9,8 +9,19 @@
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
     </div>
-
-
+    <!-- Spinner -->
+        <div class="centrado"id="spinner">
+            <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for imagen in images %}
         <div class="col">
@@ -49,5 +60,11 @@
         {% endfor %}
     </div>
 </main>
+<script>
+    window.addEventListener('load', function() {
+        var spinner = document.getElementById('spinner');
+        spinner.style.display = 'none';  // Oculta el spinner cuando la página se carga completamente
+    });
+</script> 
 
 {% endblock %}
