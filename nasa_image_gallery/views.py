@@ -49,7 +49,7 @@ def search(request):
     images, favourite_list = getAllImagesAndFavouriteList(request)
     search_msg = request.POST.get('query', '')
     
-    if not search_msg:
+    if not search_msg: #Si esta vacio asignamos 'space'
         search_msg = 'space'
     
     else:
@@ -65,7 +65,7 @@ def search(request):
     
 
 def login(request):
-    if request.method == 'POST':
+    if request.method == 'POST': # Este condicional verifica si la solicitud HTTP es de tipo POST. Esto sucede cuando el formulario de inicio de sesión se envía.
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
