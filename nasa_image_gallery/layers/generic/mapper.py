@@ -8,12 +8,21 @@ from nasa_image_gallery.layers.generic.nasa_card import NASACard
 
 # usado cuando la info. viene de la API de la nasa, para transformarlo en una NASACard.
 def fromRequestIntoNASACard(object):
+    try:
+        title = object['data'][0]['title']
+        description = object['data'][0]['description']
+        image_url = object['links'][0]['href']
+        date = object['data'][0]['date_created'][:10]
+    except KeyError as e:
+        print(f"Falta clave: {e}. Se saltea el objeto.")
+        return None  # Si falta una clave, se omite este objeto
+
     nasa_card = NASACard(
-                        title=object['data'][0]['title'],
-                        description=object['data'][0]['description'], 
-                        image_url=object['links'][0]['href'], 
-                        date=object['data'][0]['date_created'][:10]
-                )
+        title=title,
+        description=description,
+        image_url=image_url,
+        date=date
+    )
 
     return nasa_card
 
